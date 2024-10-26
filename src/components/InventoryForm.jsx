@@ -22,15 +22,20 @@ const InventoryForm = ({ addInventoryItem }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addInventoryItem(formData);
-    setFormData({
-      name: '',
-      quantity: '',
-      category: '',
-      supplier: '',
-    });
-    alert('Item added successfully!');
-    navigate('/');
+    if (typeof addInventoryItem === 'function') {
+      addInventoryItem(formData);
+      setFormData({
+        name: '',
+        quantity: '',
+        category: '',
+        supplier: '',
+      });
+      alert('Item added successfully!');
+      navigate('/');
+    } else {
+      console.error('addInventoryItem is not a function');
+      alert('Error: Unable to add item.');
+    }
   };
 
   return (
